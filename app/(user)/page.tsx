@@ -36,14 +36,18 @@
 //   };
 // };
 
-import React from 'react'
+import { draftMode } from "next/headers";
 
-function page() {
+export default function Home() {
+  const { isEnabled } = draftMode();
+  if (isEnabled) {
+    return (
+        <p>Draft Mode</p>
+  
+    );
+  }
   return (
-    <div>
-      
-    </div>
-  )
-}
+      <p>Homepage</p>
 
-export default page
+  );
+}
