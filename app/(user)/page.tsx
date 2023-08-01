@@ -1,53 +1,45 @@
-// import React from 'react'
-// import { PreviewData } from 'next'
-// import { GetStaticProps } from 'next';
-
-// const page = () => {
-//   if(PreviewData())
-//   {
-//     return (
-//       <div>
-//         <h1>Preview Mode</h1>
-//       </div>
-//     )
-//   }
-//   return (
-//     <div>
-//       Not in preview mode
-//     </div>
-//   )
-// }
-
-// import { GetServerSideProps } from 'next';
-
-// export default function Home({ draftModeEnabled }) {
-//   if (draftModeEnabled) {
-//     return <p>Draft Mode</p>;
-//   }
-//   return <p>Homepage</p>;
-// }
-
-// export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-//   const draftModeEnabled = req.url.startsWith('/api/draft');
-//   return {
-//     props: {
-//       draftModeEnabled,
-//     },
-//   };
-// };
-
 import { draftMode } from "next/headers";
+import { groq } from "next-sanity";
+import { getClient } from "../../lib/client";
+// import PreviewSuspense from "../../components/PreviewSuspense"
+import { LiveQueryProvider } from '@sanity/preview-kit'
+import PreviewBlogList from "@/components/PreviewBlogList";
+import BlogList from "@/components/BlogList";
+const query = groq`
+  *[_type == 'post']{
+    ...,
+    author->,
+    categories[]->,
+  } | order(_createdAt desc)
+`;
 
-export default function Home() {
+export default async function HomePage() {
   const { isEnabled } = draftMode();
   if (isEnabled) {
     return (
-        <p>Draft Mode</p>
-  
+    // <PreviewSuspense fallback={(
+    //   <div className="text-center text-lg animate-pulse text-blue-600">
+    //     <p>Loading...</p>
+    //   </div>
+      
+    // )}>
+      
+    // </PreviewSuspense>
+     <PreviewBlogList query={query}/>
     );
   }
-  return (
-      <p>Homepage</p>
 
-  );
+  // Use getClient to get the Sanity client
+  const sanityClient = getClient();
+
+  // Create a query execution function using the client
+  const executeQuery = async () => {
+    return await sanityClient.fetch(query);
+  };
+
+  // Call the query execution function to fetch data
+  const posts = await executeQuery();
+  // console.log(posts);
+
+  return <BlogList posts={ posts}/>
 }
