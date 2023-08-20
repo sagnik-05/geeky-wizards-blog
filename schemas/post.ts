@@ -56,6 +56,12 @@ export default defineType({
       title: 'Body',
       type: 'blockContent',
     }),
+    defineField({
+      name: 'description',
+      description: "Enter a short snippet for the blog",
+      title: 'Description',
+      type: 'string',
+    }),
   ],
 
   preview: {

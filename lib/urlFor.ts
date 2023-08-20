@@ -1,4 +1,4 @@
-import { getClient } from "./client";
+import { getClient } from "./getClient";
 import imageUrlBuilder from "@sanity/image-url";
 
 // Get a pre-configured url-builder from your sanity client

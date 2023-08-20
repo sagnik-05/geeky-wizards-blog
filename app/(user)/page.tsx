@@ -1,9 +1,10 @@
 import { draftMode } from "next/headers";
 import { groq } from "next-sanity";
-import { getClient } from "../../lib/client";
-// import PreviewSuspense from "../../components/PreviewSuspense"
-import { LiveQueryProvider } from '@sanity/preview-kit'
-import PreviewBlogList from "@/components/PreviewBlogList";
+import { getClient,getCachedClient } from "../../lib/getClient";
+import PreviewPosts from "@/components/PreviewPosts";
+import PreviewProvider from "@/components/PreviewProvider";
+import Posts from "@/components/Posts";
+import { postsQuery } from "../../lib/queries";
 import BlogList from "@/components/BlogList";
 const query = groq`
   *[_type == 'post']{
@@ -14,18 +15,15 @@ const query = groq`
 `;
 
 export default async function HomePage() {
-  const { isEnabled } = draftMode();
-  if (isEnabled) {
+  const preview = draftMode().isEnabled
+    ? { token: process.env.SANITY_API_READ_TOKEN }
+    : undefined;
+  const post = await getCachedClient(preview)(postsQuery);
+  if (preview && preview.token) {
     return (
-    // <PreviewSuspense fallback={(
-    //   <div className="text-center text-lg animate-pulse text-blue-600">
-    //     <p>Loading...</p>
-    //   </div>
-      
-    // )}>
-      
-    // </PreviewSuspense>
-     <PreviewBlogList query={query}/>
+      <PreviewProvider token={preview.token}>
+        <PreviewPosts posts={post} />
+      </PreviewProvider>
     );
   }
 
@@ -41,5 +39,5 @@ export default async function HomePage() {
   const posts = await executeQuery();
   // console.log(posts);
 
-  return <BlogList posts={ posts}/>
+  return <BlogList posts={posts} />;
 }

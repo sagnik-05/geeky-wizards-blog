@@ -1,14 +1,15 @@
+"use client"
 import { LiveQueryProvider } from "@sanity/preview-kit";
 import { useMemo } from "react";
-import { getClient } from "../lib/client";
+import { getClient } from "../lib/getClient";
 
 export default function PreviewProvider({
   children,
-  previewToken,
+  token,
 }: {
   children: React.ReactNode;
-  previewToken: string;
+  token: string;
 }) {
-  const client = useMemo(() => getClient(previewToken), [previewToken]);
+  const client = useMemo(() => getClient({token}), [token]);
   return <LiveQueryProvider client={client}>{children}</LiveQueryProvider>;
 }
