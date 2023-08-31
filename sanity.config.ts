@@ -15,6 +15,7 @@ import Logo from './components/Logo'
 // const dataset ="production"
 
 import { buildLegacyTheme } from "sanity";
+import { getDefaultDocumentNode } from './structure'
 const props  = {
     "--my-white": "#fff",
     "--my-black": "#1a1a1a",
@@ -61,7 +62,7 @@ export default defineConfig({
   schema,
   plugins: [
     deskTool({
-      // defaultDocumentNode:
+      defaultDocumentNode: getDefaultDocumentNode
     }),
     // Vision is a tool that lets you query your content with GROQ in the studio
     // https://www.sanity.io/docs/the-vision-plugin

@@ -41,6 +41,5 @@ export const client = createClient({
   dataset,
   projectId,
   useCdn,
-})
-
-export const cachedClient = cache(client.fetch.bind(client))
+});
+// export const cachedClient = cache(client.fetch.bind(client))
