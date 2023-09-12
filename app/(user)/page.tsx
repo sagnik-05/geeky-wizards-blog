@@ -15,17 +15,17 @@ const query = groq`
 `;
 
 export default async function HomePage() {
-  const preview = draftMode().isEnabled
-    ? { token: process.env.SANITY_API_READ_TOKEN }
-    : undefined;
-  const post = await getCachedClient(preview)(postsQuery);
-  if (preview && preview.token) {
-    return (
-      <PreviewProvider token={preview.token}>
-        <PreviewPosts posts={post} />
-      </PreviewProvider>
-    );
-  }
+  // const preview = draftMode().isEnabled
+  //   ? { token: process.env.SANITY_API_READ_TOKEN }
+  //   : undefined;
+  // const post = await getCachedClient(preview)(postsQuery);
+  // if (preview && preview.token) {
+  //   return (
+  //     <PreviewProvider token={preview.token}>
+  //       <PreviewPosts posts={post} />
+  //     </PreviewProvider>
+  //   );
+  // }
 
   // Use getClient to get the Sanity client
   const sanityClient = getClient();

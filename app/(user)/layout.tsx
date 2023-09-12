@@ -1,9 +1,10 @@
-import Header from '@/components/Header'
 import '../globals.css'
+import dynamic from 'next/dynamic'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Banner from '@/components/Banner'
-import Head from 'next/head'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -19,12 +20,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Head>
-          <link rel="icon" href="/gw.png" sizes="any" />
-      </Head>
-      <body className=" max-w-7xl mx-auto">
-        <Header/>
-        <Banner/>
+      <head>
+        <link rel='icon' href='/favicon.ico'/>
+      </head>
+      <body className=" max-w-7xl mx-auto" suppressHydrationWarning={true}>
+        {/* <Header/> */}
+        {/* <Banner/> */}
         {children}
       </body>
     </html>
