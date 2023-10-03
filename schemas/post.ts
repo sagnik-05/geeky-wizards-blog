@@ -62,8 +62,8 @@ export default defineType({
       title: 'Description',
       type: 'string',
     }),
+    
   ],
-
   preview: {
     select: {
       title: 'title',

@@ -14,19 +14,13 @@ function Header() {
             className="rounded-full"
           />
         </Link>
-        <h1 className="text-blue-800 text-2xl">Geeky Wizard</h1>
+        <h1 className="text-sky-800/90 text-2xl">Geeky Wizard</h1>
       </div>
       <div className=" flex justify-center ">
+        
         <Link
           href="/"
-          className="px-5 py-3 text-base  bg-blue-300 text-blue-800 flex items-center rounded-full m-2
-        text-center"
-        >
-          Home
-        </Link>
-        <Link
-          href="/"
-          className="px-5 py-3 text-base  bg-blue-300 text-blue-800 flex items-center rounded-full m-2
+          className="px-5 py-3 text-base text-white bg-gradient-to-r from-cyan-400 via-cyan-500 to-cyan-600 hover:bg-gradient-to-br flex items-center rounded-full m-2
         text-center"
         >
           Visit my Website

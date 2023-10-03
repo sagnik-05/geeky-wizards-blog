@@ -7,8 +7,6 @@ import category from "@/schemas/category";
 import { ArrowUpRightIcon } from "@heroicons/react/24/solid";
 import ClientSideRoute from "./ClientSideRoute";
 import Footer from "./Footer";
-import Banner from "./Banner";
-import Header from "./Header";
 type Props = {
   posts: Post[];
 };
@@ -16,8 +14,6 @@ type Props = {
 function BlogList({ posts }: Props) {
   return (
     <div>
-    <Header/>
-    <Banner/>
     <div>
       <hr className="border-[#29bdf2] mb-10" />
       <div className="grid grid-cols-1 md:grid-cols-2 px-10 gap-10 gap-y-16 pb-24">
@@ -65,7 +61,6 @@ function BlogList({ posts }: Props) {
           </ClientSideRoute>
         ))}
       </div>
-      <Footer />
     </div>
     </div>
   );

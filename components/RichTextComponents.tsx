@@ -1,14 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
 import urlFor from "@/lib/urlFor";
+import Refractor from "react-refractor";
+// Load any languages you want to use from `refractor`
+ import js from "refractor/lang/javascript";
+// import typescript from "refractor/lang/typescript";
+// import tsx from "refractor/lang/tsx";
 
+//You'll need to register the languages you want to use 
+ Refractor.registerLanguage(js);
+// Refractor.registerLanguage(typescript);
+// Refractor.registerLanguage(tsx);
 export const RichTextComponents = {
   types: {
     image: ({ value }: any) => {
       return (
         <div className="relative w-full h-96 m-10 mx-auto">
           <Image
-            className="object-contain"
+            className="object-contain rounded-lg hover:w-full hover:h-full"
             src={urlFor(value).url()}
             alt="Blog Post Image"
             fill
@@ -16,10 +25,21 @@ export const RichTextComponents = {
         </div>
       );
     },
+  //   myCodeField: ({ props }: any) => {
+  //     // return (
+  //     //   <Refractor
+  //     //   // In this example, `props` is the value of a `code` field
+  //     //   language={props.language}
+  //     //   value={props.code}
+  //     //   markers={props.highlightedLines}
+  //     // />
+  
+  //     // );
+  // },
   },
   list: {
     bullet: ({ children }: any) => (
-      <ul className="ml-10 py-5 list-disc space-y-5">{children}</ul>
+      <ul className="ml-10 py-5 list-disc space-y-5 text-lg">{children}</ul>
     ),
     number: ({ children }: any) => (
       <ol className="mt-lg list-decimal">{children}</ol>
@@ -33,7 +53,7 @@ export const RichTextComponents = {
       <h2 className="text-4xl py-10 font-bold">{children}</h2>
     ),
     h3: ({ children }: any) => (
-      <h3 className="lg:text-3xl py-7 font-bold text-blue-800 underline text-2xl">
+      <h3 className="lg:text-3xl py-7 font-bold text-cyan-700 underline text-2xl">
         {children}
       </h3>
     ),
@@ -43,7 +63,7 @@ export const RichTextComponents = {
       </h4>
     ),
     blockquote: ({ children }: any) => (
-      <blockquote className="border-l-[#F7AB0A] border-1-4 pl-5 py-5 my-5">
+      <blockquote className="pl-5 py-5 my-5 bg-[#1E293B] text-md font-mono text-[#7BCFF7]">
         {children}
       </blockquote>
     ),
