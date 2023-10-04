@@ -45,7 +45,7 @@ type Props = {
     slug: string;
   };
 };
-export const revalidate = 30;
+// export const revalidate = 30;
 
 export async function generateStaticParams() {
   const query = groq`*[_type=='post']{
@@ -58,6 +58,7 @@ export async function generateStaticParams() {
   return slugRoutes.map((slug) => ({
     slug,
   }));
+  revalidate : 60
 }
 function Post({ params: { slug } }: Props) {
   const [post, setPost] = useState<Post | null>(null);

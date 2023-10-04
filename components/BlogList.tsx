@@ -10,7 +10,6 @@ import Footer from "./Footer";
 type Props = {
   posts: Post[];
 };
-export const revalidate = 30;
 function BlogList({ posts }: Props) {
   return (
     <div>
