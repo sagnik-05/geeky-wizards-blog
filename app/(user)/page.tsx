@@ -13,7 +13,6 @@ const query = groq`
     categories[]->,
   } | order(_createdAt desc)
 `;
-export const revalidate = 30;
 export default async function HomePage() {
   // const preview = draftMode().isEnabled
   //   ? { token: process.env.SANITY_API_READ_TOKEN }
